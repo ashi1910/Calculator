@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+        }
+
+        table{
+            border: 1px solid rgb(53, 197, 189);
+            border-radius: 20px;
+            padding: 10px;
+            background-color: darkslategray;
+        }
+
+        td{
+            padding: 2px;
+        }
+
+        input{
+            padding: 30px 42px;
+            border-radius: 20px;
+            width: 100%;
+            border: none;
+            font-size: 20px;
+            text-align: right;
+        }
+
+        input:focus{
+            outline: none;
+            border: none;
+        }
+
+        button{
+            height: 80px;
+            width: 80px;
+            border-radius: 20px;
+            background-color: lightseagreen;
+            border: none;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        button:active{
+            background-color: rgb(15, 217, 207);
+        }
+
+        #plus{
+            height: 170px;
+        }
+
+        #equal{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <td colspan="4"><input type="text" id="answer"></td>
+        </tr>
+        <tr>
+            <td><button onclick="clearAnswer()">C</button></td>
+            <td><button onclick="display('/')">/</button></td>
+            <td><button onclick="display('*')">*</button></td>
+            <td><button onclick="backSpace()"><i class="material-icons">backspace</i></button></td>
+        </tr>
+        <tr>
+            <td><button onclick="display(7)">7</button></td>
+            <td><button onclick="display(8)">8</button></td>
+            <td><button onclick="display(9)">9</button></td>
+            <td><button onclick="display('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="display(4)">4</button></td>
+            <td><button onclick="display(5)">5</button></td>
+            <td><button onclick="display(6)">6</button></td>
+            <td rowspan="2"><button onclick="display('+')" id="plus">+</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="display(1)">1</button></td>
+            <td><button onclick="display(2)">2</button></td>
+            <td><button onclick="display(3)">3</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="display(0)">0</button></td>
+            <td><button onclick="display('.')">.</button></td>
+            <td colspan="2"><button onclick="equal()" id="equal">=</button></td>
+        </tr>
+    </table>
+
+    <script>
+
+        function display(val)
+        {
+            document.getElementById("answer").value += val;
+        }
+
+        function clearAnswer()
+        {
+            document.getElementById("answer").value = "";
+        }
+
+        function backSpace()
+        {
+            var answer = document.getElementById("answer").value;
+            document.getElementById("answer").value = answer.substr(0, answer.length-1);
+        }
+
+        function equal()
+        {
+            var x = document.getElementById("answer").value;
+            var y = eval(x);
+            document.getElementById("answer").value = y;
+        }
+
+        var answer = document.getElementById("answer");
+        answer.addEventListener("keypress", function(event)
+        {
+            if(event.key === "Enter")
+            {
+                event.preventDefault();
+                document.getElementById("equal").click();
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
